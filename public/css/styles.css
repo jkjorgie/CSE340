@@ -1,6 +1,252 @@
-/******* Change Box Model ***************/
+/*** Change Box Model ***/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+/*** Variables ***/
+:root {
+  --dark-gray: #272727;
+  --tan: #D4AA7D;
+  --light-tan: #EFD09E;
+  --sage: #D2D8B3;
+  --blue-gray: #90A9B7;
+}
+
+/*** Body ***/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--light-tan);
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/*** Header Styles ***/
+#top-header {
+  background-color: var(--dark-gray);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#top-header .siteName a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#top-header .siteName a:hover {
+  color: var(--light-tan);
+}
+
+#tools a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+#tools a:hover {
+  color: var(--tan);
+}
+
+/*** Navigation Styles ***/
+nav {
+  background-color: var(--sage);
+  width: 100%;
+  padding: 0;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav ul li {
+  padding: 1rem;
+  /* color: white; */
+  color: var(--dark-gray);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+nav ul li:hover {
+  background-color: var(--tan);
+  color: var(--dark-gray);
+}
+
+/*** Main Content ***/
+main {
+  flex: 1;
+}
+
+/**** Hero Section ***/
+.hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-image: url('/images/vehicles/delorean.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  background-color: rgba(39, 39, 39, 0.8);
+  color: white;
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+  color: var(--light-tan);
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--tan);
+  color: var(--dark-gray);
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--light-tan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/*** Content Wrapper ***/
+.content-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+}
+
+/*** Upgrades Section ***/
+.upgrades-section {
+  flex: 1;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upgrades-section h2 {
+  color: var(--dark-gray);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.upgrade-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark-gray);
+  padding: 1rem;
+  background-color: var(--sage);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.upgrade-card:hover {
+  background-color: var(--tan);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upgrade-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 0.75rem;
+}
+
+.upgrade-card span {
+  font-weight: bold;
+  text-align: center;
+}
+
+/*** Reviews Section ***/
+.reviews-section {
+  flex: 1;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section h2 {
+  color: var(--dark-gray);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reviews-list li {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--sage);
+  border-left: 4px solid var(--dark-gray);
+  border-radius: 4px;
+  color: var(--dark-gray);
+  font-style: italic;
+}
+
+.reviews-list li:last-child {
+  margin-bottom: 0;
+}
+
+.reviews-list .rating {
+  font-weight: bold;
+  color: var(--dark-gray);
+  font-style: normal;
+  margin-left: 0.5rem;
 }
