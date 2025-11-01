@@ -152,6 +152,7 @@ main {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
+    background-color: var(--dark-gray);
   }
 }
 
