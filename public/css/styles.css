@@ -266,6 +266,20 @@ main {
   margin-left: 0.5rem;
 }
 
+/*** Error Page Styles ***/
+.error-title {
+  color: var(--dark-gray);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-message {
+  color: var(--dark-gray);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 /*** Inventory Display Grid ***/
 #inv-display {
   list-style: none;
