@@ -377,8 +377,8 @@ footer a:hover {
 
 #inv-display .namePrice span {
   font-size: 1.3rem;
-  font-weight: bold;
-  color: var(--blue-gray);
+  /* font-weight: bold; */
+  color: var(--dark-gray);
 }
 
 /*** Vehicle Detail View ***/
