@@ -77,11 +77,65 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
+/* **************************************
+ * Build the detail view HTML
+ * ************************************ */
+Util.buildDetailView = async function (vehicle) {
+  let detail = '<div id="vehicle-detail">';
+
+  // Image section
+  detail += '<div class="detail-image">';
+  detail +=
+    '<img src="' +
+    vehicle.inv_image +
+    '" alt="Image of ' +
+    vehicle.inv_year +
+    " " +
+    vehicle.inv_make +
+    " " +
+    vehicle.inv_model +
+    ' on CSE Motors" />';
+  detail += "</div>";
+
+  // Content section
+  detail += '<div class="detail-content">';
+
+  // Price - prominent
+  detail +=
+    '<p class="detail-price">$' +
+    new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
+    "</p>";
+
+  // Description
+  detail += '<p class="detail-description">' + vehicle.inv_description + "</p>";
+
+  // Specifications
+  detail += '<div class="detail-specs">';
+  detail += "<h3>Vehicle Specifications</h3>";
+  detail += "<ul>";
+  detail += "<li><strong>Year:</strong> " + vehicle.inv_year + "</li>";
+  detail += "<li><strong>Make:</strong> " + vehicle.inv_make + "</li>";
+  detail += "<li><strong>Model:</strong> " + vehicle.inv_model + "</li>";
+  detail +=
+    "<li><strong>Mileage:</strong> " +
+    new Intl.NumberFormat("en-US").format(vehicle.inv_miles) +
+    " miles</li>";
+  detail += "<li><strong>Color:</strong> " + vehicle.inv_color + "</li>";
+  detail += "</ul>";
+  detail += "</div>";
+
+  detail += "</div>"; // End detail-content
+  detail += "</div>"; // End vehicle-detail
+
+  return detail;
+};
+
 /* ****************************************
  * Middleware For Handling Errors
- * Wrap other function in this for 
+ * Wrap other function in this for
  * General Error Handling
  **************************************** */
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
 
 module.exports = Util;
