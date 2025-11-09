@@ -24,6 +24,7 @@ async function getInventoryByClassificationId(classification_id) {
     return data.rows;
   } catch (error) {
     console.error("getclassificationsbyid error " + error);
+    throw new Error("No matching classification found");
   }
 }
 
@@ -39,6 +40,7 @@ async function getInventoryByInvId(inv_id) {
     return data.rows[0];
   } catch (error) {
     console.error("getInventoryByInvId error " + error);
+    throw new Error("No matching vehicle found");
   }
 }
 

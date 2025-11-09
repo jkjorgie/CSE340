@@ -35,4 +35,11 @@ invCont.buildByInvId = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Intentional Error Route - Task 3
+ * ************************** */
+invCont.causeError = async function (req, res, next) {
+  throw new Error("This is an intentional error for testing purposes.");
+};
+
 module.exports = invCont;
