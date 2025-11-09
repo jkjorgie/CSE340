@@ -83,7 +83,6 @@ Util.buildClassificationGrid = async function (data) {
 Util.buildDetailView = async function (vehicle) {
   let detail = '<div id="vehicle-detail">';
 
-  // Image section
   detail += '<div class="detail-image">';
   detail +=
     '<img src="' +
@@ -97,19 +96,15 @@ Util.buildDetailView = async function (vehicle) {
     ' on CSE Motors" />';
   detail += "</div>";
 
-  // Content section
   detail += '<div class="detail-content">';
 
-  // Price - prominent
   detail +=
     '<p class="detail-price">$' +
     new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
     "</p>";
 
-  // Description
   detail += '<p class="detail-description">' + vehicle.inv_description + "</p>";
 
-  // Specifications
   detail += '<div class="detail-specs">';
   detail += "<h3>Vehicle Specifications</h3>";
   detail += "<ul>";
@@ -124,8 +119,8 @@ Util.buildDetailView = async function (vehicle) {
   detail += "</ul>";
   detail += "</div>";
 
-  detail += "</div>"; // End detail-content
-  detail += "</div>"; // End vehicle-detail
+  detail += "</div>";
+  detail += "</div>";
 
   return detail;
 };
