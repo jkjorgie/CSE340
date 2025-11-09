@@ -40,8 +40,14 @@ app.use(async (req, res, next) => {
  * Place after all other middleware
  *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav();
+  let nav = "<nav><ul><li><a href='/'>Home</a></li></ul></nav>";
+  try {
+    nav = await utilities.getNav();
+  } catch (error) {
+    console.error("Could not load navigation:", error.message);
+  }
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  let message;
   if (err.status == 404) {
     message = err.message;
   } else {
