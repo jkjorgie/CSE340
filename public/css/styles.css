@@ -154,6 +154,20 @@ main {
     flex-direction: column;
     background-color: var(--dark-gray);
   }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--tan);
+  }
+
+  nav ul li:last-child {
+    border-bottom: none;
+  }
 }
 
 /*** Upgrades Section ***/
@@ -250,4 +264,100 @@ main {
   color: var(--dark-gray);
   font-style: normal;
   margin-left: 0.5rem;
+}
+
+/*** Inventory Display Grid ***/
+#inv-display {
+  list-style: none;
+  padding: 0 1.5rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* Medium screens - 2 columns */
+@media (min-width: 600px) {
+  #inv-display {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large screens - 3 columns */
+@media (min-width: 900px) {
+  #inv-display {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra large screens - 4 columns */
+@media (min-width: 1200px) {
+  #inv-display {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+#inv-display li {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+#inv-display li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#inv-display li a {
+  text-decoration: none;
+  color: var(--dark-gray);
+}
+
+#inv-display li img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+#inv-display .namePrice {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#inv-display .namePrice hr {
+  border: none;
+  border-top: 2px solid var(--tan);
+  margin: 0 0 1rem 0;
+}
+
+#inv-display .namePrice h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: var(--dark-gray);
+}
+
+#inv-display .namePrice h2 a {
+  color: var(--dark-gray);
+  transition: color 0.2s ease;
+}
+
+#inv-display .namePrice h2 a:hover {
+  color: var(--tan);
+}
+
+#inv-display .namePrice span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--blue-gray);
 }
