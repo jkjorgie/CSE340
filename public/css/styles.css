@@ -297,7 +297,8 @@ footer a:hover {
   line-height: 1.6;
 }
 
-.detail-title, .classification-title {
+.detail-title,
+.classification-title {
   color: var(--dark-gray);
   font-size: 2rem;
   font-weight: bold;
@@ -521,4 +522,122 @@ footer a:hover {
   nav ul li:last-child {
     border-bottom: none;
   }
+}
+
+/*** Form Styles ***/
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  color: var(--dark-gray);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--dark-gray);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--sage);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--tan);
+  box-shadow: 0 0 0 3px rgba(212, 170, 125, 0.1);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: #d32f2f;
+}
+
+.form-container button.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--tan);
+  color: var(--dark-gray);
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-container button.btn-primary:hover {
+  background-color: var(--light-tan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-container button.btn-primary:active {
+  transform: translateY(0);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--dark-gray);
+  font-size: 1rem;
+}
+
+.register-link a {
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.register-link a:hover {
+  color: var(--dark-gray);
+  text-decoration: underline;
+}
+
+/* Flash Messages */
+.notice,
+.error,
+.success {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.notice {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-left: 4px solid #1976d2;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #c62828;
+}
+
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
 }
