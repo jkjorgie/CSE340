@@ -10,4 +10,10 @@ router.get(
   utilities.handleErrors(accountController.buildLogin)
 );
 
+// Route for register
+router.get(
+  "/register",
+  utilities.handleErrors(accountController.buildRegister)
+);
+
 module.exports = router;
