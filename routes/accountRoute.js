@@ -5,15 +5,18 @@ const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
 
 // Route for login
-router.get(
-  "/login",
-  utilities.handleErrors(accountController.buildLogin)
-);
+router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
 // Route for register
 router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
+);
+
+// Route for register post
+router.post(
+  "/register",
+  utilities.handleErrors(accountController.registerAccount)
 );
 
 module.exports = router;

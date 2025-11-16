@@ -720,3 +720,11 @@ footer a:hover {
   color: #2e7d32;
   border-left: 4px solid #2e7d32;
 }
+
+.notice li,
+.error li,
+.success li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0;
+}
