@@ -535,6 +535,19 @@ footer a:hover {
   .password-toggle {
     width: 100%;
   }
+
+  .management-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .management-container h1 {
+    font-size: 2rem;
+  }
+
+  .management-links {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*** Form Styles ***/
@@ -565,16 +578,26 @@ footer a:hover {
   font-size: 1rem;
 }
 
-.form-group input {
+.form-group input,
+.form-group select,
+.form-group textarea {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid var(--sage);
   border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.form-group input:focus {
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: var(--tan);
   box-shadow: 0 0 0 3px rgba(212, 170, 125, 0.1);
@@ -582,6 +605,18 @@ footer a:hover {
 
 .form-group input:invalid:not(:placeholder-shown) {
   border-color: #d32f2f;
+}
+
+.form-group select {
+  cursor: pointer;
+  background-color: white;
+}
+
+.input-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 .form-container button.btn-primary {
@@ -727,4 +762,71 @@ footer a:hover {
   list-style: none;
   padding-left: 0;
   margin: 0.5rem 0;
+}
+
+/*** Inventory Management Styles ***/
+.management-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.management-container h1 {
+  color: var(--dark-gray);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.management-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.management-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.management-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.management-card h2 {
+  color: var(--dark-gray);
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.management-card p {
+  color: var(--dark-gray);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.management-card .btn-primary {
+  display: inline-block;
+  background-color: var(--tan);
+  color: var(--dark-gray);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.management-card .btn-primary:hover {
+  background-color: var(--light-tan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
