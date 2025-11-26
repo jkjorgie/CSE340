@@ -830,3 +830,174 @@ footer a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/*** Inventory Selector Section ***/
+.inventory-selector {
+  background-color: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.inventory-selector h2 {
+  color: var(--dark-gray);
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.inventory-selector p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/*** Classification Dropdown Styles ***/
+#classificationList {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  margin: 0 auto;
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--dark-gray);
+  background-color: white;
+  border: 2px solid var(--sage);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#classificationList:hover {
+  border-color: var(--tan);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+#classificationList:focus {
+  outline: none;
+  border-color: var(--tan);
+  box-shadow: 0 0 0 3px rgba(212, 170, 125, 0.2);
+}
+
+/*** Inventory Table Styles ***/
+#inventoryDisplay {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#inventoryDisplay thead {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+#inventoryDisplay thead tr th,
+#inventoryDisplay thead tr td {
+  padding: 1rem;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid var(--tan);
+}
+
+#inventoryDisplay tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--sage);
+}
+
+#inventoryDisplay tbody tr:last-child {
+  border-bottom: none;
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: rgba(210, 216, 179, 0.2);
+}
+
+#inventoryDisplay tbody td {
+  padding: 1rem;
+  color: var(--dark-gray);
+  font-size: 1rem;
+}
+
+#inventoryDisplay tbody td:first-child {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+#inventoryDisplay tbody td a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 80px;
+}
+
+/* Modify Link Styling */
+#inventoryDisplay tbody td a[href*='/edit/'] {
+  background-color: var(--blue-gray);
+  color: white;
+}
+
+#inventoryDisplay tbody td a[href*='/edit/']:hover {
+  background-color: #7a94a3;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete Link Styling */
+#inventoryDisplay tbody td a[href*='/delete/'] {
+  background-color: #d32f2f;
+  color: white;
+}
+
+#inventoryDisplay tbody td a[href*='/delete/']:hover {
+  background-color: #b71c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* No Data Message */
+#inventoryDisplay tbody tr td[colspan] {
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive Table */
+@media (max-width: 600px) {
+  #classificationList {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  #inventoryDisplay {
+    font-size: 0.9rem;
+  }
+
+  #inventoryDisplay thead tr th,
+  #inventoryDisplay thead tr td,
+  #inventoryDisplay tbody td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  #inventoryDisplay tbody td a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    min-width: 70px;
+  }
+}

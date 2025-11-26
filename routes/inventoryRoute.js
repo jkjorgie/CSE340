@@ -48,6 +48,26 @@ router.get(
   utilities.handleErrors(invController.buildByInvId)
 );
 
+// Route to get inventory by classification as JSON
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
+// Route to build edit inventory view
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+
+// Route to process edit inventory
+router.post(
+  "/edit-inventory/",
+  invValidate.addInventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+);
+
 // Route to trigger intentional error (for testing - Task 3)
 router.get("/cause-error", utilities.handleErrors(invController.causeError));
 
