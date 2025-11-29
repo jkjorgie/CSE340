@@ -1,0 +1,103 @@
+<div class="update-account-container">
+    <h1>
+        <%= title %>
+    </h1>
+
+    <%- messages() %>
+
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error=> { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+
+                <div class="update-forms-wrapper">
+                    <!-- Account Information Update Form -->
+                    <div class="form-section">
+                        <h2>Account Update</h2>
+                        <form id="updateForm" action="/account/update" method="post">
+                            <div class="form-group">
+                                <label for="account_firstname">First Name:<span class="required">*</span></label>
+                                <input type="text" id="account_firstname" name="account_firstname" required
+                                    placeholder="Enter your first name"
+                                    value="<%= locals.account_firstname ? account_firstname : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="account_lastname">Last Name:<span class="required">*</span></label>
+                                <input type="text" id="account_lastname" name="account_lastname" required
+                                    placeholder="Enter your last name"
+                                    value="<%= locals.account_lastname ? account_lastname : '' %>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="account_email">Email Address:<span class="required">*</span></label>
+                                <input type="email" id="account_email" name="account_email" required
+                                    placeholder="Enter a valid email address"
+                                    value="<%= locals.account_email ? account_email : '' %>">
+                            </div>
+
+                            <input type="hidden" name="account_id" value="<%= locals.account_id ? account_id : '' %>">
+
+                            <button type="submit" class="btn-primary">Update Account</button>
+                        </form>
+                    </div>
+
+                    <!-- Password Change Form -->
+                    <div class="form-section">
+                        <h2>Change Password</h2>
+                        <form id="changePasswordForm" action="/account/change-password" method="post">
+                            <div class="form-group">
+                                <label for="account_password">New Password:<span class="required">*</span></label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="account_password" name="account_password" required
+                                        placeholder="Enter a strong password"
+                                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+                                        title="Password must meet the requirements below">
+                                    <button type="button" id="pswdBtn" class="password-toggle"
+                                        aria-label="Show password as plain text">Show Password</button>
+                                </div>
+                                <div class="password-requirements">
+                                    <p><strong>Password Requirements:</strong></p>
+                                    <ul>
+                                        <li>Must be at least 12 characters long</li>
+                                        <li>Must contain at least 1 capital letter</li>
+                                        <li>Must contain at least 1 number</li>
+                                        <li>Must contain at least 1 special character</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="account_id" value="<%= locals.account_id ? account_id : '' %>">
+
+                            <button type="submit" class="btn-primary">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+
+                <p class="register-link">
+                    <a href="/account/">Return to Account Management</a>
+                </p>
+</div>
+
+<script>
+    // Password visibility toggle
+    const pswdBtn = document.getElementById('pswdBtn');
+    const pswdInput = document.getElementById('account_password');
+
+    pswdBtn.addEventListener('click', function () {
+        const type = pswdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        pswdInput.setAttribute('type', type);
+
+        // Toggle button text
+        this.textContent = type === 'password' ? 'Show Password' : 'Hide Password';
+
+        // Update aria-label for accessibility
+        const label = type === 'password' ? 'Show password as plain text' : 'Hide password';
+        this.setAttribute('aria-label', label);
+    });
+</script>

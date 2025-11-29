@@ -266,9 +266,101 @@ invCont.updateInventory = async function (req, res, next) {
       classification_id
     );
     const itemName = `${inv_make} ${inv_model}`;
-    req.flash("notice", "Sorry, the insert failed.");
+    req.flash("notice", "Sorry, the update failed.");
     res.status(501).render("inventory/edit-inventory", {
       title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+  }
+};
+
+/* ***************************
+ *  Build delete confirmatino view
+ * ************************** */
+invCont.deleteInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const itemData = await invModel.getInventoryByInvId(inv_id);
+  const classificationList = await utilities.buildClassificationList(
+    itemData.classification_id
+  );
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    classificationList,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id,
+  });
+};
+
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const updateResult = await invModel.deleteInventory(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model;
+    req.flash("notice", `The vehicle was successfully deleted.`);
+    res.redirect("/inv/");
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("notice", "Sorry, the delete failed.");
+    res.status(501).render("inventory/delete-confirm", {
+      title: "Delete " + itemName,
       nav,
       classificationSelect: classificationSelect,
       errors: null,

@@ -6,17 +6,23 @@ const utilities = require("../utilities/");
 const invValidate = require("../utilities/inventory-validation");
 
 // Route to build inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get(
+  "/",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildManagement)
+);
 
 // Route to build add classification view
 router.get(
   "/add-classification",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildAddClassification)
 );
 
 // Route to process add classification
 router.post(
   "/add-classification",
+  utilities.checkAccountType,
   invValidate.addClassificationRules(),
   invValidate.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
@@ -25,12 +31,14 @@ router.post(
 // Route to build add inventory view
 router.get(
   "/add-inventory",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildAddInventory)
 );
 
 // Route to process add inventory
 router.post(
   "/add-inventory",
+  utilities.checkAccountType,
   invValidate.addInventoryRules(),
   invValidate.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
@@ -51,21 +59,38 @@ router.get(
 // Route to get inventory by classification as JSON
 router.get(
   "/getInventory/:classification_id",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.getInventoryJSON)
 );
 
 // Route to build edit inventory view
 router.get(
   "/edit/:inv_id",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.editInventoryView)
 );
 
 // Route to process edit inventory
 router.post(
   "/edit-inventory/",
+  utilities.checkAccountType,
   invValidate.addInventoryRules(),
   invValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
+);
+
+// Route to build delete inventory view
+router.get(
+  "/delete/:inv_id",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.deleteInventoryView)
+);
+
+// Route to process delete inventory
+router.post(
+  "/delete-inventory/",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.deleteInventory)
 );
 
 // Route to trigger intentional error (for testing - Task 3)

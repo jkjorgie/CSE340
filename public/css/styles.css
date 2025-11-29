@@ -1001,3 +1001,157 @@ footer a:hover {
     min-width: 70px;
   }
 }
+
+/*** Account Management Styles ***/
+.account-management-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.account-management-container h1 {
+  color: var(--dark-gray);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.account-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0 auto;
+  min-width: 400px;
+}
+
+.account-content h2 {
+  color: var(--dark-gray);
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.account-content h3 {
+  color: var(--dark-gray);
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--sage);
+  text-align: center;
+}
+
+.account-link {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.account-link a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--tan);
+  color: var(--dark-gray);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.account-link a:hover {
+  background-color: var(--light-tan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .account-management-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .account-content {
+    padding: 1.5rem;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .account-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .account-content h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/*** Update Account Styles ***/
+.update-account-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.update-account-container h1 {
+  color: var(--dark-gray);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.update-forms-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+  color: var(--dark-gray);
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--tan);
+  padding-bottom: 0.75rem;
+}
+
+.form-note {
+  background-color: #e3f2fd;
+  border-left: 4px solid #1976d2;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  color: var(--dark-gray);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .update-forms-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .update-account-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .form-section h2 {
+    font-size: 1.5rem;
+  }
+}
