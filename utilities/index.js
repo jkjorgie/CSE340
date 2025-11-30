@@ -202,7 +202,31 @@ Util.checkAccountType = (req, res, next) => {
     if (accountType === "Employee" || accountType === "Admin") {
       next();
     } else {
-      req.flash("notice", "You do not have permission to access this resource.");
+      req.flash(
+        "notice",
+        "You do not have permission to access this resource."
+      );
+      return res.redirect("/account/login");
+    }
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
+
+/* ****************************************
+ *  Check Admin Type (Admin only)
+ * ************************************ */
+Util.checkAdminType = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type;
+    if (accountType === "Admin") {
+      next();
+    } else {
+      req.flash(
+        "notice",
+        "You must be an administrator to access this resource."
+      );
       return res.redirect("/account/login");
     }
   } else {

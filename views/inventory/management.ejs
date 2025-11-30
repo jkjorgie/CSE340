@@ -17,16 +17,23 @@
                 <p>Add a new vehicle to the inventory</p>
                 <a href="/inv/add-inventory" class="btn-primary">Add Vehicle</a>
             </div>
+
+            <% if (locals.accountData && locals.accountData.account_type==='Admin' ) { %>
+                <div class="management-card">
+                    <h2>Approve Changes</h2>
+                    <p>Review and approve pending classifications and vehicles</p>
+                    <a href="/inv/approve" class="btn-primary">Approve Changes</a>
+                </div>
+                <% } %>
         </div>
 
-        <div class="inventory-selector">
+        <div class="inventory-selector-full">
             <h2>Manage Vehicle Inventory</h2>
             <p>Select a classification to view and manage vehicles</p>
             <%- classificationSelect %>
+                <table id="inventoryDisplay"></table>
+                <noscript>JavaScript must be enabled to use this page.</noscript>
         </div>
-
-        <table id="inventoryDisplay"></table>
-        <noscript>JavaScript must be enabled to use this page.</noscript>
 </div>
 
 <script src="../../js/inventory.js"></script>
