@@ -71,6 +71,7 @@ invCont.addClassification = async function (req, res, next) {
 
   if (addResult) {
     let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash(
       "notice",
       `The ${classification_name} classification was successfully added.`
@@ -79,6 +80,7 @@ invCont.addClassification = async function (req, res, next) {
       title: "Inventory Management",
       nav,
       errors: null,
+      classificationSelect,
     });
   } else {
     let nav = await utilities.getNav();
@@ -138,6 +140,7 @@ invCont.addInventory = async function (req, res, next) {
 
   if (addResult) {
     let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList();
     req.flash(
       "notice",
       `The ${inv_year} ${inv_make} ${inv_model} was successfully added.`
@@ -146,6 +149,7 @@ invCont.addInventory = async function (req, res, next) {
       title: "Inventory Management",
       nav,
       errors: null,
+      classificationSelect,
     });
   } else {
     let nav = await utilities.getNav();
@@ -293,7 +297,7 @@ invCont.updateInventory = async function (req, res, next) {
 invCont.deleteInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
-  const itemData = await invModel.getInventoryByInvId(inv_id);
+  const itemData = await invModel.getInventoryByInvIdAll(inv_id);
   const classificationList = await utilities.buildClassificationList(
     itemData.classification_id
   );
@@ -377,6 +381,82 @@ invCont.deleteInventory = async function (req, res, next) {
       classification_id,
     });
   }
+};
+
+/* ***************************
+ *  Build approve changes view (Admin only)
+ * ************************** */
+invCont.buildApproveChanges = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const pendingClassifications = await invModel.getPendingClassifications();
+  const pendingInventory = await invModel.getPendingInventory();
+  res.render("./inventory/approve-changes", {
+    title: "Approve Pending Changes",
+    nav,
+    pendingClassifications,
+    pendingInventory,
+    errors: null,
+  });
+};
+
+/* ***************************
+ *  Approve Classification
+ * ************************** */
+invCont.approveClassification = async function (req, res, next) {
+  const { classification_id } = req.body;
+  const approveResult = await invModel.approveClassification(classification_id);
+
+  if (approveResult) {
+    req.flash("notice", `The classification was successfully approved.`);
+  } else {
+    req.flash("notice", "Sorry, the approval failed.");
+  }
+  res.redirect("/inv/approve");
+};
+
+/* ***************************
+ *  Approve Inventory
+ * ************************** */
+invCont.approveInventory = async function (req, res, next) {
+  const { inv_id } = req.body;
+  const approveResult = await invModel.approveInventory(inv_id);
+
+  if (approveResult) {
+    req.flash("notice", `The vehicle was successfully approved.`);
+  } else {
+    req.flash("notice", "Sorry, the approval failed.");
+  }
+  res.redirect("/inv/approve");
+};
+
+/* ***************************
+ *  Delete Classification
+ * ************************** */
+invCont.deleteClassification = async function (req, res, next) {
+  const { classification_id } = req.body;
+  const deleteResult = await invModel.deleteClassification(classification_id);
+
+  if (deleteResult) {
+    req.flash("notice", `The classification was successfully deleted.`);
+  } else {
+    req.flash("notice", "Sorry, the deletion failed.");
+  }
+  res.redirect("/inv/approve");
+};
+
+/* ***************************
+ *  Delete Pending Inventory
+ * ************************** */
+invCont.deletePendingInventory = async function (req, res, next) {
+  const { inv_id } = req.body;
+  const deleteResult = await invModel.deleteInventory(inv_id);
+
+  if (deleteResult) {
+    req.flash("notice", `The vehicle was successfully deleted.`);
+  } else {
+    req.flash("notice", "Sorry, the deletion failed.");
+  }
+  res.redirect("/inv/approve");
 };
 
 module.exports = invCont;

@@ -93,6 +93,41 @@ router.post(
   utilities.handleErrors(invController.deleteInventory)
 );
 
+// Route to build approve changes view (Admin only)
+router.get(
+  "/approve",
+  utilities.checkAdminType,
+  utilities.handleErrors(invController.buildApproveChanges)
+);
+
+// Route to approve classification
+router.post(
+  "/approve-classification",
+  utilities.checkAdminType,
+  utilities.handleErrors(invController.approveClassification)
+);
+
+// Route to approve inventory
+router.post(
+  "/approve-inventory",
+  utilities.checkAdminType,
+  utilities.handleErrors(invController.approveInventory)
+);
+
+// Route to delete classification
+router.post(
+  "/delete-classification",
+  utilities.checkAdminType,
+  utilities.handleErrors(invController.deleteClassification)
+);
+
+// Route to delete pending inventory
+router.post(
+  "/delete-pending-inventory",
+  utilities.checkAdminType,
+  utilities.handleErrors(invController.deletePendingInventory)
+);
+
 // Route to trigger intentional error (for testing - Task 3)
 router.get("/cause-error", utilities.handleErrors(invController.causeError));
 

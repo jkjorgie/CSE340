@@ -948,12 +948,12 @@ footer a:hover {
 
 /* Modify Link Styling */
 #inventoryDisplay tbody td a[href*='/edit/'] {
-  background-color: var(--blue-gray);
+  background-color: #5a7a8a;
   color: white;
 }
 
 #inventoryDisplay tbody td a[href*='/edit/']:hover {
-  background-color: #7a94a3;
+  background-color: #4a6a7a;
   transform: translateY(-2px);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
@@ -1153,5 +1153,275 @@ footer a:hover {
 
   .form-section h2 {
     font-size: 1.5rem;
+  }
+}
+
+/*** Inventory Selector Full Width ***/
+.inventory-selector-full {
+  background: white;
+  padding: 2rem 2rem 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.inventory-selector-full h2 {
+  margin-top: 0;
+  color: #2d3748;
+  text-align: center;
+}
+
+.inventory-selector-full p {
+  color: #718096;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.inventory-selector-full select {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.inventory-selector-full #inventoryDisplay {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+/*** Approval Section Styles ***/
+.approval-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.approval-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.approval-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.approval-table thead {
+  background: #4a5568;
+  color: white;
+}
+
+.approval-table th,
+.approval-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.approval-table tbody tr:hover {
+  background: #f7fafc;
+}
+
+.approval-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.action-buttons {
+  white-space: nowrap;
+}
+
+.btn-approve {
+  background: #48bb78;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+.btn-approve:hover {
+  background: #38a169;
+}
+
+.btn-delete {
+  background: #f56565;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-delete:hover {
+  background: #e53e3e;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  display: inline-block;
+  background: #4a5568;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #2d3748;
+}
+
+.no-pending {
+  color: #4a5568;
+  font-style: italic;
+  padding: 1rem;
+}
+
+.back-link {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/*** Mobile Responsive Tables ***/
+@media (max-width: 768px) {
+  /* Inventory Display Table - Mobile */
+  #inventoryDisplay {
+    border: 0;
+  }
+
+  #inventoryDisplay thead {
+    display: none;
+  }
+
+  #inventoryDisplay tbody tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--sage);
+    border-radius: 8px;
+    background-color: white;
+    padding: 1rem;
+  }
+
+  #inventoryDisplay tbody tr:hover {
+    background-color: rgba(210, 216, 179, 0.3);
+  }
+
+  #inventoryDisplay tbody td {
+    display: block;
+    text-align: left;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--sage);
+  }
+
+  #inventoryDisplay tbody td:last-child {
+    border-bottom: none;
+  }
+
+  #inventoryDisplay tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--dark-gray);
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  #inventoryDisplay tbody td:first-child {
+    font-size: 1.1rem;
+    padding-top: 0;
+    border-bottom: 2px solid var(--tan);
+    margin-bottom: 0.5rem;
+  }
+
+  #inventoryDisplay tbody td a {
+    display: block;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  /* Approval Tables - Mobile */
+  .approval-table {
+    border: 0;
+  }
+
+  .approval-table thead {
+    display: none;
+  }
+
+  .approval-table tbody tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: white;
+    padding: 1rem;
+  }
+
+  .approval-table tbody tr:hover {
+    background-color: #f7fafc;
+  }
+
+  .approval-table tbody td {
+    display: block;
+    text-align: left;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .approval-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .approval-table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .approval-table tbody td:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding-top: 0;
+    border-bottom: 2px solid #4a5568;
+    margin-bottom: 0.5rem;
+  }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .action-buttons form,
+  .action-buttons a {
+    width: 100%;
+  }
+
+  .action-buttons button,
+  .action-buttons .btn-delete {
+    width: 100%;
+    display: block;
+    margin: 0;
   }
 }

@@ -1,0 +1,82 @@
+<div class="management-container">
+    <h1>
+        <%= title %>
+    </h1>
+
+    <%- messages() %>
+
+    <div class="approval-section">
+        <h2>Pending Classifications</h2>
+        <% if (pendingClassifications && pendingClassifications.length > 0) { %>
+            <table class="approval-table">
+                <thead>
+                    <tr>
+                        <th>Classification Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pendingClassifications.forEach(function(classification) { %>
+                        <tr>
+                            <td data-label="Classification Name"><%= classification.classification_name %></td>
+                            <td data-label="Actions" class="action-buttons">
+                                <form method="post" action="/inv/approve-classification" style="display: inline;">
+                                    <input type="hidden" name="classification_id" value="<%= classification.classification_id %>">
+                                    <button type="submit" class="btn-approve">Approve</button>
+                                </form>
+                                <form method="post" action="/inv/delete-classification" style="display: inline;">
+                                    <input type="hidden" name="classification_id" value="<%= classification.classification_id %>">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="no-pending">No pending classifications.</p>
+        <% } %>
+    </div>
+
+    <div class="approval-section">
+        <h2>Pending Vehicles</h2>
+        <% if (pendingInventory && pendingInventory.length > 0) { %>
+            <table class="approval-table">
+                <thead>
+                    <tr>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                        <th>Classification</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pendingInventory.forEach(function(vehicle) { %>
+                        <tr>
+                            <td data-label="Make"><%= vehicle.inv_make %></td>
+                            <td data-label="Model"><%= vehicle.inv_model %></td>
+                            <td data-label="Year"><%= vehicle.inv_year %></td>
+                            <td data-label="Classification"><%= vehicle.classification_name %></td>
+                            <td data-label="Price">$<%= new Intl.NumberFormat('en-US').format(vehicle.inv_price) %></td>
+                            <td data-label="Actions" class="action-buttons">
+                                <form method="post" action="/inv/approve-inventory" style="display: inline;">
+                                    <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+                                    <button type="submit" class="btn-approve">Approve</button>
+                                </form>
+                                <a href="/inv/delete/<%= vehicle.inv_id %>" class="btn-delete">Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="no-pending">No pending vehicles.</p>
+        <% } %>
+    </div>
+
+    <div class="back-link">
+        <a href="/inv/" class="btn-secondary">Back to Management</a>
+    </div>
+</div>
