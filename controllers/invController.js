@@ -387,29 +387,54 @@ invCont.deleteInventory = async function (req, res, next) {
  *  Build approve changes view (Admin only)
  * ************************** */
 invCont.buildApproveChanges = async function (req, res, next) {
-  let nav = await utilities.getNav();
-  const pendingClassifications = await invModel.getPendingClassifications();
-  const pendingInventory = await invModel.getPendingInventory();
-  res.render("./inventory/approve-changes", {
-    title: "Approve Pending Changes",
-    nav,
-    pendingClassifications,
-    pendingInventory,
-    errors: null,
-  });
+  try {
+    let nav = await utilities.getNav();
+    const pendingClassifications = await invModel.getPendingClassifications();
+    const pendingInventory = await invModel.getPendingInventory();
+    res.render("./inventory/approve-changes", {
+      title: "Approve Pending Changes",
+      nav,
+      pendingClassifications,
+      pendingInventory,
+      errors: null,
+    });
+  } catch (error) {
+    console.error("buildApproveChanges error: " + error);
+    req.flash(
+      "notice",
+      "Sorry, there was an error loading the pending changes."
+    );
+    res.redirect("/inv/");
+  }
 };
 
 /* ***************************
  *  Approve Classification
  * ************************** */
 invCont.approveClassification = async function (req, res, next) {
-  const { classification_id } = req.body;
-  const approveResult = await invModel.approveClassification(classification_id);
+  try {
+    const { classification_id } = req.body;
 
-  if (approveResult) {
-    req.flash("notice", `The classification was successfully approved.`);
-  } else {
-    req.flash("notice", "Sorry, the approval failed.");
+    if (!classification_id) {
+      req.flash("notice", "Missing classification ID.");
+      return res.redirect("/inv/approve");
+    }
+
+    const approveResult = await invModel.approveClassification(
+      classification_id
+    );
+
+    if (approveResult) {
+      req.flash("notice", `The classification was successfully approved.`);
+    } else {
+      req.flash("notice", "Sorry, the classification was not found.");
+    }
+  } catch (error) {
+    console.error("approveClassification error: " + error);
+    req.flash(
+      "notice",
+      "Sorry, there was an error approving the classification."
+    );
   }
   res.redirect("/inv/approve");
 };
@@ -418,13 +443,24 @@ invCont.approveClassification = async function (req, res, next) {
  *  Approve Inventory
  * ************************** */
 invCont.approveInventory = async function (req, res, next) {
-  const { inv_id } = req.body;
-  const approveResult = await invModel.approveInventory(inv_id);
+  try {
+    const { inv_id } = req.body;
 
-  if (approveResult) {
-    req.flash("notice", `The vehicle was successfully approved.`);
-  } else {
-    req.flash("notice", "Sorry, the approval failed.");
+    if (!inv_id) {
+      req.flash("notice", "Missing vehicle ID.");
+      return res.redirect("/inv/approve");
+    }
+
+    const approveResult = await invModel.approveInventory(inv_id);
+
+    if (approveResult) {
+      req.flash("notice", `The vehicle was successfully approved.`);
+    } else {
+      req.flash("notice", "Sorry, the vehicle was not found.");
+    }
+  } catch (error) {
+    console.error("approveInventory error: " + error);
+    req.flash("notice", "Sorry, there was an error approving the vehicle.");
   }
   res.redirect("/inv/approve");
 };
@@ -433,13 +469,34 @@ invCont.approveInventory = async function (req, res, next) {
  *  Delete Classification
  * ************************** */
 invCont.deleteClassification = async function (req, res, next) {
-  const { classification_id } = req.body;
-  const deleteResult = await invModel.deleteClassification(classification_id);
+  try {
+    const { classification_id } = req.body;
 
-  if (deleteResult) {
-    req.flash("notice", `The classification was successfully deleted.`);
-  } else {
-    req.flash("notice", "Sorry, the deletion failed.");
+    if (!classification_id) {
+      req.flash("notice", "Missing classification ID.");
+      return res.redirect("/inv/approve");
+    }
+
+    const deleteResult = await invModel.deleteClassification(classification_id);
+
+    if (deleteResult && deleteResult.rowCount > 0) {
+      req.flash("notice", `The classification was successfully deleted.`);
+    } else {
+      req.flash("notice", "Sorry, the classification was not found.");
+    }
+  } catch (error) {
+    console.error("deleteClassification error: " + error);
+    if (error.code === "23503") {
+      req.flash(
+        "notice",
+        "Cannot delete classification. There are vehicles associated with it."
+      );
+    } else {
+      req.flash(
+        "notice",
+        "Sorry, there was an error deleting the classification."
+      );
+    }
   }
   res.redirect("/inv/approve");
 };
@@ -448,13 +505,24 @@ invCont.deleteClassification = async function (req, res, next) {
  *  Delete Pending Inventory
  * ************************** */
 invCont.deletePendingInventory = async function (req, res, next) {
-  const { inv_id } = req.body;
-  const deleteResult = await invModel.deleteInventory(inv_id);
+  try {
+    const { inv_id } = req.body;
 
-  if (deleteResult) {
-    req.flash("notice", `The vehicle was successfully deleted.`);
-  } else {
-    req.flash("notice", "Sorry, the deletion failed.");
+    if (!inv_id) {
+      req.flash("notice", "Missing vehicle ID.");
+      return res.redirect("/inv/approve");
+    }
+
+    const deleteResult = await invModel.deleteInventory(inv_id);
+
+    if (deleteResult && deleteResult.rowCount > 0) {
+      req.flash("notice", `The vehicle was successfully deleted.`);
+    } else {
+      req.flash("notice", "Sorry, the vehicle was not found.");
+    }
+  } catch (error) {
+    console.error("deletePendingInventory error: " + error);
+    req.flash("notice", "Sorry, there was an error deleting the vehicle.");
   }
   res.redirect("/inv/approve");
 };
